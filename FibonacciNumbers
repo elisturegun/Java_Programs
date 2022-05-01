@@ -1,0 +1,238 @@
+/**
+ * An Fibonacci seris class 
+ * @author Oyku Elis Turegun
+ * @version 18.06.2021
+ */
+public class Fibonacci {
+    //properties
+    private int num1;
+    private int num2;
+    private int nextNum;
+    private IntBag newBag = new IntBag();
+    
+    //constructor
+    public Fibonacci() {
+        num1 = 0;
+        num2 = 1;
+        newBag.bag[0] = num1;
+        newBag.bag[1] = num2;
+    }
+    
+    /**
+     * method for calculating next fibonacci number
+     * and collects them as IntBag
+     * @param int n
+     */
+    public void printNext( int n) {
+        System.out.println( " " +num1 + "\n " + num2);
+        for ( int i = 2; i < n; i++)  {
+            nextNum = num1 + num2;
+            System.out.println( " " + nextNum );
+            num1 = num2;
+            num2 = nextNum;    
+        }
+    }
+    
+    /**
+     * Main method for printing 40 fibonacci numbers
+     */
+    public static void main( String [] args ) {
+        
+        Fibonacci fib;
+        fib = new Fibonacci();
+        fib.printNext(40);
+        
+    }
+    
+}
+
+import java.util.Arrays;
+/**
+ * An Integer Bag class to store int values
+ * @author Oyku Elis Turegun
+ * @version 18.06.2021
+ */
+public class IntBag {
+    //properties
+    int [] bag;
+    
+    //constructors
+    public IntBag() {
+        bag = new int[4];
+    }
+    
+    
+    /**
+     * adding method for adding a new number to the bag
+     * @param int newNum
+     */
+    public void add(int newNum ) {
+        
+        int maxCapacity = bag.length* 2;
+        int [] newBag = new int[maxCapacity];
+        for(int k = 0; k < bag.length; k++ ) {
+            newBag[k] = bag[k];
+        }
+        for ( int j = 0; j < newBag.length-1; j++) {
+            if( newBag[j] <= 0 ) {
+                newBag[j] = newNum;
+                newBag[j+1] = -1;
+            }
+        }  
+    }
+    
+    /**
+     * adding method for adding a new number to spesific index in the bag
+     * @param int newNum, int index
+     */
+    public void add(int newNum, int index ) {
+        if ( index > 0 ) { 
+            if ( index < bag.length ) {
+                int term = bag[index];
+                bag[index] = newNum;
+                for(int j = index; bag[j] >= 0 && bag.length -1 > j; j++) {
+                    bag[j] = term;
+                    term = bag[j+1];
+                }
+            }
+            else if ( index >= bag.length ) {
+                int maxCapacity = bag.length* 2;
+
+                int [] newBag = new int[maxCapacity];
+                
+                for(int k = 0; k < bag.length; k++ ) {
+                    newBag[k] = bag[k];
+                }
+                int term = newBag[index];
+                newBag[index] = newNum;
+                
+                for(int j = index; newBag[j] >= 0 && newBag.length -1 > j; j++) {
+                    newBag[j] = term;
+                    term = newBag[j+1];
+                }    
+            }
+        }
+        else {
+            System.out.println("Invalid index");
+        }       
+    }
+    
+    /**
+     * checking if the given value is in the bag oor not
+     * @param int value
+     * @return boolean check 
+     */
+    public boolean hasValue( int value ) {
+        boolean check = false;
+        for ( int a = 0; a < bag.length; a++) {
+            if ( bag[a] == value ) {
+                check = true;
+            }
+        }
+        return check;   
+    }
+    
+    /**
+     * finding certain value in the given index
+     * @param int index
+     * @return currentSize
+     */
+    public int findValue( int index ) {
+        if(index >= bag.length) {
+            System.out.println("Index is not valid");
+        }
+        return bag[index];
+    }
+    
+    /**
+     * method to calculate current size
+     * @return currentSize
+     */
+    public int findSize(IntBag bag2) {
+        int currentSize = 0;
+        for(int j = 0; j < bag2.bag.length; j++ ) {
+            if ( bag2.bag[j] >= 0 ) {
+                currentSize++;
+            }
+        }
+        return currentSize;
+    }
+    
+    /**
+     * String representation of a bag
+     */
+    public String toString( IntBag bag2) {
+        String result = "Values: ";
+        for ( int i = 0; i < bag2.bag.length; i++) {
+            if( bag2.bag[i] > 0 ) {
+                result = result + " " + bag2.bag[i] + " "; 
+            }
+        }
+        result = result + "\n Size: " + findSize(bag2);
+        return result;
+    }
+
+}
+
+import java.util.Scanner;
+public class Test {
+    public static void main ( String [] args ) {
+        //variables
+        int userChoice;
+        int capacity = 0;
+        int value;
+        int index;
+        Scanner scan = new Scanner(System.in);
+        
+        //creating IntBag object
+        IntBag newBag = new IntBag();
+        System.out.println("WELCOME TO THE MENU\nPLEASE SELECT AN OPTION");
+    
+
+            do {
+                System.out.println(" 1- Create a new empty collection(any previous values are lost!");
+                System.out.println(" 2- Read a set of positive values into the collection (use zero to indicate all the values have been entered.");
+                System.out.println(" 3- Print the collection of values.");
+                System.out.println(" 4- Add a value to the collection of values at a specified location");
+                System.out.println(" 5- Remove the value at a specified location from the collection of values");
+                System.out.println(" 6- Remove all instances of a value within the collection* (see note below)");
+                System.out.println(" 7- Quit the program.");
+                
+                userChoice = scan.nextInt();
+                if ( userChoice == 1 ) {
+                    System.out.print("Please enter a capacity: ");
+                    capacity = scan.nextInt();
+                }
+                if ( userChoice == 2 ) {
+                    for( int i = 1; i < capacity; i++ ) {
+                        System.out.print("Please enter a value: ");
+                        newBag.add( scan.nextInt());
+                    }
+                }
+                if ( userChoice == 3 ) {
+                    System.out.println(newBag.toString(newBag)); 
+                }
+                if ( userChoice == 4 ) {
+                    System.out.println("Enter a value: ");
+                    value = scan.nextInt();
+                    
+                    System.out.println("Enter an index : ");
+                    index = scan.nextInt();
+                    
+                    newBag.add(value,index);
+                    
+                }
+                if ( userChoice == 5 ) {
+                    
+                }
+                if ( userChoice == 6 ) {
+                    
+                }
+                if ( userChoice == 7 ) {
+                    System.out.println("GOODBYE!");
+                }
+        }while (userChoice != 7);
+        
+        }
+}
+
