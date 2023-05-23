@@ -1,126 +1,144 @@
-import java.util.Arrays;
-/**
- * An Integer Bag class to store int values
- * @author Oyku Elis Turegun
- * @version 18.06.2021
- */
-public class IntBag {
+import java.util.Iterator;
+public class IntBag implements Iterator
+{
     //properties
-    int [] bag;
-    
+    private int index;
+    private int[] bag;
+    private int valid;
+
+
     //constructors
     public IntBag() {
-        bag = new int[4];
+        bag = new int[ 100 ];
+        valid = 0;
+        index = 0;
     }
-    
-    
-    /**
-     * adding method for adding a new number to the bag
-     * @param int newNum
-     */
-    public void add(int newNum ) {
-        
-        int maxCapacity = bag.length* 2;
-        int [] newBag = new int[maxCapacity];
-        for(int k = 0; k < bag.length; k++ ) {
-            newBag[k] = bag[k];
-        }
-        for ( int j = 0; j < newBag.length-1; j++) {
-            if( newBag[j] <= 0 ) {
-                newBag[j] = newNum;
-                newBag[j+1] = -1;
-            }
-        }  
-    }
-    
-    /**
-     * adding method for adding a new number to spesific index in the bag
-     * @param int newNum, int index
-     */
-    public void add(int newNum, int index ) {
-        if ( index > 0 ) { 
-            if ( index < bag.length ) {
-                int term = bag[index];
-                bag[index] = newNum;
-                for(int j = index; bag[j] >= 0 && bag.length -1 > j; j++) {
-                    bag[j] = term;
-                    term = bag[j+1];
-                }
-            }
-            else if ( index >= bag.length ) {
-                int maxCapacity = bag.length* 2;
 
-                int [] newBag = new int[maxCapacity];
-                
-                for(int k = 0; k < bag.length; k++ ) {
-                    newBag[k] = bag[k];
+    public IntBag( int maxNumOfElements ) {
+        bag = new int[ maxNumOfElements ];
+        valid = 0;
+        index = 0;
+    }
+
+    // methods
+    public void add( int value ) {
+        if( valid < bag.length ) {
+            bag[valid] = value;
+            valid++;
+        }
+        else
+            System.out.println( "Capacity is full!" );
+    }
+
+    public void addTo( int index, int value ) {
+        if( index >= 0 && index <= valid ) {
+            if( valid >= bag.length ) {
+                int[] newArray = new int[ bag.length * 10 ];//newArray is created if our array is exceeded
+                for( int i: bag ) {
+                    newArray[i] = bag[i];
                 }
-                int term = newBag[index];
-                newBag[index] = newNum;
-                
-                for(int j = index; newBag[j] >= 0 && newBag.length -1 > j; j++) {
-                    newBag[j] = term;
-                    term = newBag[j+1];
-                }    
+                bag = newArray;
             }
+
+            if( valid != 0 ) {
+                for( int i = valid - 1; index <= i; i-- ) {
+                    bag[ i + 1 ] = bag[ i ];
+                }
+                bag[index] = value;
+                valid++;
+                System.out.println( "Done" );
+            }
+        }
+    }
+
+
+    public void remove( int index ) {
+        if( index < valid ) {
+            for( int i = 1; i < valid - index; i++) {
+                bag[index + i - 1] = bag[index + i];
+            }
+            valid--;
+            System.out.println( "Done" );
+        }
+        else
+            System.out.println( "Please enter a valid index" );
+    }
+
+    public boolean contains( int value ) {
+        for( int i = 0; i < valid; i++) {
+            if( bag[i] == value ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String toString() {
+        String str;
+        int length;
+
+        str = "[";
+        length = 0;
+
+        for( int i = 0; i < valid; i++) {
+            str = str + bag[i] + ",";
+        }
+        length = str.length();
+        str = str.substring( 0, length - 1 ) + "]";
+        return str;
+    }
+
+    public int size() {
+        return valid;
+    }
+
+    public int get( int index ) {
+        if( index < valid ) {
+            return bag[index];
         }
         else {
-            System.out.println("Invalid index");
-        }       
+            return -1;
+        }
     }
-    
-    /**
-     * checking if the given value is in the bag oor not
-     * @param int value
-     * @return boolean check 
-     */
-    public boolean hasValue( int value ) {
-        boolean check = false;
-        for ( int a = 0; a < bag.length; a++) {
-            if ( bag[a] == value ) {
-                check = true;
+
+    public String findAll( int value ) {
+        boolean found;
+        String str;
+
+        str = "";
+        found = false;
+
+        for( int i = 0; i < valid; i++) {
+            if( bag[i] == value ) {
+                found = true;
             }
+            if( found == true ) {
+                str = str + i + ",";
+            }
+            found = false;
         }
-        return check;   
+        return ("The locations(indexes) of the value are: " + str);
     }
-    
-    /**
-     * finding certain value in the given index
-     * @param int index
-     * @return currentSize
-     */
-    public int findValue( int index ) {
-        if(index >= bag.length) {
-            System.out.println("Index is not valid");
-        }
+
+    public Iterator iterator() {
+        IntBagIterator i;
+        i = new IntBagIterator( this );
+        return i;
+    }
+
+    public Object next() {
+        Integer i;
+        i = bag[index];
+        index++;
+        return i;
+    }
+
+    public boolean hasNext() {
+        return index < valid;
+    }
+
+    public int nextInt() {
+        index++;
         return bag[index];
     }
-    
-    /**
-     * method to calculate current size
-     * @return currentSize
-     */
-    public int findSize(IntBag bag2) {
-        int currentSize = 0;
-        for(int j = 0; j < bag2.bag.length; j++ ) {
-            if ( bag2.bag[j] >= 0 ) {
-                currentSize++;
-            }
-        }
-        return currentSize;
-    }
-    
-    /**
-     * String representation of a bag
-     */
-    public String toString( IntBag bag2) {
-        String result = "Values: ";
-        for ( int i = 0; i < bag2.bag.length; i++) {
-            if( bag2.bag[i] > 0 ) {
-                result = result + " " + bag2.bag[i] + " "; 
-            }
-        }
-        result = result + "\n Size: " + findSize(bag2);
-        return result;
-    }  
-}
+}   
