@@ -2,7 +2,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * This program designed for CS101 LAB8B assignment
  * Stores words to an ArrayList from text file.
  * Outputs the maximum length of an element, frequency and counts of elements have same length 
  * @author Elis Türegün
