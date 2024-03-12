@@ -3,9 +3,13 @@ MY JAVA CODES
 LibrarySystem.java
 
 Java code consists of several classes and methods for a library management system. Here's a breakdown of each class:
+
 1-	Library: This class represents a library and includes methods to add, remove, and find books in the library. It has properties such as bookList, which is an ArrayList containing LibraryBook objects. Methods include isEmpty() to check if the library is empty, add() to add a book, remove() to remove a book, findByTitle() to find a book by its title, and toString() to represent the library's information as a string.
+
 2-	LibraryBook: This class represents a book in the library. It has properties like title, author, dueDate, and timesLoaned. Methods include getters for timesLoaned, title, and author, as well as methods like onLoan() to check if the book is on loan, loanBook() to loan the book, returnBook() to return the book, toString() to represent the book's information as a string, equals() to compare books for equality, and hasSameTitle() and hasSameAuthor() to check if books have the same title or author.
+
 3-	LibraryTest: This class serves as a test class for the Library class. It includes a main() method where users can interact with the library system through a console menu. Users can choose options to show, find, or add books, and perform operations like loaning, returning, or removing books.
+
 4-	TestLibraryBook: This class serves as a test class for the LibraryBook class. It includes a main() method to test various functionalities of the LibraryBook class, such as loaning, returning, and comparing books.
 
 DeliverySystem.java
