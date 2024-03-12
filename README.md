@@ -35,6 +35,7 @@ Java code implements a delivery management system with classes representing empl
 9-	Company Class: Implements the Locatable interface and represents a company that employs employees and manages customer deliveries. It can add employees, add customers, create deliverables, terminate contracts, and deliver packages.
 
 10-	CompanyTester Class: Contains the main method to test the functionalities of the Company class and its related components. It creates instances of employees, customers, items, and the company and initiates deliveries to test delivery functionality.
+
 Overall, the code provides a framework for managing employees, customers, items, and deliveries within a company, facilitating the logistics of package handling and delivery.
 
 DiceGame.java
@@ -52,6 +53,7 @@ Java code consists of several classes related to a dice game:
 5-	TestDiceGame Class: A test class that demonstrates how to use the DiceGame class by playing the game and printing the number of times it took to reach the target total.
 
 6-	TestDie Class: A test class that demonstrates how to use the Die class by rolling two dice and printing their face values.
+
 Overall, these classes provide a framework for simulating dice games and testing individual die rolls.
 
 DocumentAnalyzerProgram.java
@@ -63,6 +65,7 @@ Java code comprises three classes:
 2-	Document: This class represents a document. It processes a text file, splits it into words, and calculates the count and frequency of a given word in the document. It also calculates the most frequent word in the document.
 
 3-	Term: This class represents a term (word) in a document. It has properties for the word itself and a count representing how many times the word appears in the document. It also has methods to increment the count and retrieve the word.
+
 Overall, this code provides functionality to analyze and process text documents, including tasks such as word frequency analysis and TF-IDF calculation.
 
 ArithmeticCalculatorProgram.java
@@ -98,6 +101,7 @@ These Java classes constitute a simple bomb game GUI application. Here's a brief
 4-	PrizeButton: Represents a button that reveals a prize when clicked. It changes its text to a star emoji and adjusts its font and color.
 
 5-	RegularButton: Represents a regular empty button in the game. When clicked, it disables itself.
+
 Overall, these classes work together to create a simple bomb game interface where players click buttons to guess and reveal bombs or prizes.
 
 ConvertingNumberSystems.java
@@ -107,6 +111,7 @@ This Java code consists of two classes:
 1-	Converting: This class extends JPanel and provides functionality to convert between decimal, binary, and hexadecimal numbers. It includes methods to convert decimal to binary, decimal to hexadecimal, hexadecimal to decimal, hexadecimal to binary, binary to decimal, and binary to hexadecimal. Each conversion method is implemented as an ActionListener subclass, and it updates the corresponding text fields accordingly. The class also contains constants for hexadecimal letters and methods to handle conversions between hexadecimal letters and decimal numbers.
 
 2-	Test: This class contains the main method to test the functionality of the Converting class. It creates a JFrame and adds an instance of the Converting class as a panel to it.
+
 Overall, this code provides a graphical user interface (GUI) for converting between decimal, binary, and hexadecimal numbers.
 
 DecimalToBinary.java
@@ -126,6 +131,7 @@ Java code defines a class named FillBox that contains methods for creating, fill
 4-	fillBox method: It fills the inside of the box represented by the two-dimensional array with a given character (ch). It recursively checks neighboring cells to see if they are empty and fills them if they are.
 
 5-	drawFigure method: It recursively divides the box into quadrants until the size of the box is smaller than 7x7. At that point, it fills the remaining space with a given character ('*') using the fillBox method.
+
 Overall, this code demonstrates a recursive approach to filling a two-dimensional array representing a box and dividing it into quadrants.
 
 FibonacciNumbers.java
