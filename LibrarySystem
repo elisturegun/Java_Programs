@@ -101,7 +101,6 @@ public class Library {
   }  
 }
 /**
- * Designed for CS101 Lab07b assignment
  * Library application for loaning/returning book
  * @author Elis Turegun
  * @version 17.12.20
@@ -261,7 +260,6 @@ public class LibraryBook {
 }
 import java.util.Scanner;
 /**
- * Designed for Lab08a assignment
  * Test class for Library class
  * @author Elis Türegün
  * @version 24.11.2020
